@@ -26,6 +26,16 @@ export const videoChallenges = [
     id: 5,
     aiVideo: "/videos/ai-5.mp4",
     realVideo: "/videos/real-5.mp4"
+  },
+  {
+    id: 6,
+    aiVideo: "/videos/ai-6.mp4",
+    realVideo: "/videos/real-6.mp4"
+  },
+  {
+    id: 7,
+    aiVideo: "/videos/ai-7.mp4",
+    realVideo: "/videos/real-7.mp4"
   }
 ];
 
