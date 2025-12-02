@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PhoneVerificationScreen from './components/PhoneVerificationScreen';
 import WelcomeScreen from './components/WelcomeScreen';
 import VideoComparisonScreen from './components/VideoComparisonScreen';
 import CongratulationsScreen from './components/CongratulationsScreen';
@@ -7,7 +8,8 @@ import { getRandomizedChallenge, getShuffledChallenges } from './videoConfig';
 
 function App() {
   // Game state - easily expandable for future screens
-  const [gameState, setGameState] = useState('welcome'); // 'welcome', 'playing', 'failure', 'congratulations'
+  const [gameState, setGameState] = useState('phoneVerification'); // 'phoneVerification', 'welcome', 'playing', 'failure', 'congratulations'
+  const [verifiedPhoneNumber, setVerifiedPhoneNumber] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [currentChallenge, setCurrentChallenge] = useState(null);
@@ -21,6 +23,12 @@ function App() {
       setCurrentChallenge(challenge);
     }
   }, [currentQuestion, shuffledChallenges]);
+
+  // Handle phone verification
+  const handlePhoneVerify = (phoneNumber) => {
+    setVerifiedPhoneNumber(phoneNumber);
+    setGameState('welcome');
+  };
 
   // Handle start game
   const handleStart = () => {
@@ -60,6 +68,10 @@ function App() {
   // Render current screen based on game state
   return (
     <div className="w-full h-screen bg-black">
+      {gameState === 'phoneVerification' && (
+        <PhoneVerificationScreen onVerify={handlePhoneVerify} />
+      )}
+
       {gameState === 'welcome' && (
         <WelcomeScreen onStart={handleStart} />
       )}
